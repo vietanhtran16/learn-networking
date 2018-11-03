@@ -1,0 +1,1 @@
+bucket = "viet-networking-terraform"
