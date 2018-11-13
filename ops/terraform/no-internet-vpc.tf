@@ -1,5 +1,5 @@
 resource "aws_vpc" "vpc-no-internet" {
-  cidr_block = "10.0.0.0/21"
+  cidr_block = "${var.private_subnet_cidr}"
 
   tags {
     Name = "viet-vpc-no-internet"
