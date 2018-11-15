@@ -1,5 +1,5 @@
 resource "aws_vpc" "vpc-with-internet" {
-  cidr_block = "${var.public_subnet_cidr}"
+  cidr_block = "${var.internet_vpc_cidr}"
   enable_dns_hostnames = true
 
   tags {
