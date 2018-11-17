@@ -25,17 +25,10 @@ resource "aws_subnet" "public-subnet" {
   }
 }
 
-resource "aws_route_table" "public-subnet-route-table" {
-  vpc_id = "${aws_vpc.vpc-with-internet.id}"
-
-  route {
-    cidr_block = "0.0.0.0/0"
-    gateway_id = "${aws_internet_gateway.internet-gateway.id}"
-  }
-
-  tags {
-    Name = "Public Subnet Route Table"
-  }
+resource "aws_route" "internet_access" {
+  route_table_id         = "${aws_vpc.vpc-with-internet.main_route_table_id}"
+  destination_cidr_block = "0.0.0.0/0"
+  gateway_id             = "${aws_internet_gateway.internet-gateway.id}"
 }
 
 resource "aws_route_table_association" "route-table-association" {
