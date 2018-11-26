@@ -35,3 +35,22 @@ resource "aws_instance" "ec2-with-internet" {
     Name = "ec2-with-internet"
   }
 }
+
+resource "aws_instance" "ec2-with-no-internet" {
+  ami  = "${var.ami}"
+  instance_type = "t1.micro"
+  key_name = "${aws_key_pair.default.id}"
+  subnet_id = "${aws_subnet.private-subnet.id}"
+  vpc_security_group_ids = ["${aws_security_group.no-internet-sg.id}"]
+  
+  source_dest_check = false
+  user_data = "${file("install.sh")}"
+  availability_zone = "ap-southeast-2a"
+
+  lifecycle {
+    ignore_changes = ["user_data"]
+  } 
+  tags {
+    Name = "ec2-with-no-internet"
+  }
+}
