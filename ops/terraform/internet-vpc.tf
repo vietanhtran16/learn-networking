@@ -27,20 +27,12 @@ resource "aws_subnet" "public-subnet" {
   }
 }
 
-resource "aws_route_table" "public-subnet-rt" {
-  vpc_id = "${aws_vpc.vpc-with-internet.id}"
-
-  route {
-    cidr_block = "0.0.0.0/0"
-    gateway_id = "${aws_internet_gateway.internet-gateway.id}"
-  }
+resource "aws_subnet" "viet-private-subnet" {
+  vpc_id     = "${aws_vpc.vpc-with-internet.id}"
+  cidr_block = "10.0.10.0/24"
+  availability_zone = "ap-southeast-2a"
 
   tags {
-    Name = "Public Subnet RT"
+    Name = "viet-private-subnet"
   }
-}
-
-resource "aws_route_table_association" "web-public-rt" {
-  subnet_id = "${aws_subnet.public-subnet.id}"
-  route_table_id = "${aws_route_table.public-subnet-rt.id}"
 }

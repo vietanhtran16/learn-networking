@@ -21,7 +21,7 @@ resource "aws_instance" "ec2-with-internet" {
   ami  = "${var.ami}"
   instance_type = "t1.micro"
   key_name = "${aws_key_pair.default.id}"
-  subnet_id = "${aws_subnet.public-subnet.id}"
+  subnet_id = "${aws_subnet.viet-private-subnet.id}"
   vpc_security_group_ids = ["${aws_security_group.internet-vpc-bastion-sg.id}"]
   
   source_dest_check = false
