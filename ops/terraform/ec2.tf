@@ -1,8 +1,8 @@
-resource "aws_instance" "internet-vpc-bastion" {
+resource "aws_instance" "bastion-vpc-i" {
   ami  = "${var.ami}"
   instance_type = "t1.micro"
   key_name = "${aws_key_pair.default.id}"
-  subnet_id = "${aws_subnet.public-subnet.id}"
+  subnet_id = "${aws_subnet.public-subnet-vpc-i.id}"
   vpc_security_group_ids = ["${aws_security_group.internet-vpc-bastion-sg.id}"]
   associate_public_ip_address = true
   source_dest_check = false
@@ -13,15 +13,15 @@ resource "aws_instance" "internet-vpc-bastion" {
     ignore_changes = ["user_data"]
   } 
   tags {
-    Name = "internet-vpc-bastion"
+    Name = "bastion-vpc-i"
   }
 }
 
-resource "aws_instance" "ec2-with-internet" {
+resource "aws_instance" "ec2-vpc-i" {
   ami  = "${var.ami}"
   instance_type = "t1.micro"
   key_name = "${aws_key_pair.default.id}"
-  subnet_id = "${aws_subnet.viet-private-subnet.id}"
+  subnet_id = "${aws_subnet.private-subnet-vpc-i.id}"
   vpc_security_group_ids = ["${aws_security_group.internet-vpc-bastion-sg.id}"]
   
   source_dest_check = false
@@ -32,15 +32,15 @@ resource "aws_instance" "ec2-with-internet" {
     ignore_changes = ["user_data"]
   } 
   tags {
-    Name = "ec2-with-internet"
+    Name = "ec2-vpc-i"
   }
 }
 
-resource "aws_instance" "ec2-with-no-internet" {
+resource "aws_instance" "ec2-vpc-ni" {
   ami  = "${var.ami}"
   instance_type = "t1.micro"
   key_name = "${aws_key_pair.default.id}"
-  subnet_id = "${aws_subnet.private-subnet.id}"
+  subnet_id = "${aws_subnet.private-subnet-vpc-ni.id}"
   vpc_security_group_ids = ["${aws_security_group.no-internet-sg.id}"]
   
   source_dest_check = false
@@ -51,6 +51,6 @@ resource "aws_instance" "ec2-with-no-internet" {
     ignore_changes = ["user_data"]
   } 
   tags {
-    Name = "ec2-with-no-internet"
+    Name = "ec2-vpc-ni"
   }
 }

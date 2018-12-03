@@ -16,23 +16,23 @@ resource "aws_internet_gateway" "internet-gateway" {
   }
 }
 
-resource "aws_subnet" "public-subnet" {
+resource "aws_subnet" "public-subnet-vpc-i" {
   vpc_id     = "${aws_vpc.vpc-with-internet.id}"
   cidr_block = "10.0.8.0/24"
   map_public_ip_on_launch = true
   availability_zone = "ap-southeast-2a"
 
   tags {
-    Name = "public-subnet"
+    Name = "public-subnet-vpc-i"
   }
 }
 
-resource "aws_subnet" "viet-private-subnet" {
+resource "aws_subnet" "private-subnet-vpc-i" {
   vpc_id     = "${aws_vpc.vpc-with-internet.id}"
   cidr_block = "10.0.10.0/24"
   availability_zone = "ap-southeast-2a"
 
   tags {
-    Name = "viet-private-subnet"
+    Name = "private-subnet-vpc-i"
   }
 }

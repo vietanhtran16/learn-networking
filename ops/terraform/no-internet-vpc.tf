@@ -8,12 +8,12 @@ resource "aws_vpc" "vpc-no-internet" {
   }
 }
 
-resource "aws_subnet" "private-subnet" {
+resource "aws_subnet" "private-subnet-vpc-ni" {
   vpc_id     = "${aws_vpc.vpc-no-internet.id}"
   cidr_block = "10.0.0.0/24"
   availability_zone = "ap-southeast-2a"
 
   tags {
-    Name = "private-subnet"
+    Name = "private-subnet-vpc-ni"
   }
 }
