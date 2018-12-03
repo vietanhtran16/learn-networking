@@ -24,6 +24,11 @@ resource "aws_route_table" "viet-private-subnet-rt" {
     nat_gateway_id = "${aws_nat_gateway.nat.id}"
   }
 
+  route {
+    cidr_block = "10.0.0.0/24"
+    vpc_peering_connection_id = "${aws_vpc_peering_connection.vpc-peering.id}"
+  }
+
   tags {
     Name = "Private Subnet Route Table"
   }
