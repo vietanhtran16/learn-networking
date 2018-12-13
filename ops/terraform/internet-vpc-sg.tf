@@ -39,13 +39,6 @@ resource "aws_security_group" "default-sg-vpc-i" {
 
 resource "aws_security_group" "vpn_server_sg" {
   name = "vpn_server_sg"
-  
-  ingress {
-    from_port = 80
-    to_port = 80
-    protocol = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
 
   ingress {
     from_port = 443
@@ -73,5 +66,11 @@ resource "aws_security_group" "vpn_server_sg" {
     to_port         = 0
     protocol        = "-1"
     cidr_blocks     = ["0.0.0.0/0"]
+  }
+
+  vpc_id="${aws_vpc.vpc-with-internet.id}"
+
+  tags {
+    Name = "vpn_server_sg"
   }
 }

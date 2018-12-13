@@ -3,7 +3,7 @@ resource "aws_instance" "bastion-vpc-i" {
   instance_type = "t1.micro"
   key_name = "${aws_key_pair.default.id}"
   subnet_id = "${aws_subnet.public-subnet-vpc-i.id}"
-  vpc_security_group_ids = ["${aws_security_group.default-sg-vpc-i.id}"]
+  vpc_security_group_ids = ["${aws_security_group.vpn_server_sg.id}", "${aws_security_group.default-sg-vpc-i.id}"]
   associate_public_ip_address = true
   source_dest_check = false
   user_data = "${file("install.sh")}"
