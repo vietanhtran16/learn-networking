@@ -3,7 +3,7 @@ resource "aws_instance" "bastion-vpc-i" {
   instance_type = "t1.micro"
   key_name = "${aws_key_pair.default.id}"
   subnet_id = "${aws_subnet.public-subnet-vpc-i.id}"
-  vpc_security_group_ids = ["${aws_security_group.internet-vpc-bastion-sg.id}"]
+  vpc_security_group_ids = ["${aws_security_group.default-sg-vpc-i.id}"]
   associate_public_ip_address = true
   source_dest_check = false
   user_data = "${file("install.sh")}"
@@ -22,7 +22,7 @@ resource "aws_instance" "ec2-vpc-i" {
   instance_type = "t1.micro"
   key_name = "${aws_key_pair.default.id}"
   subnet_id = "${aws_subnet.private-subnet-vpc-i.id}"
-  vpc_security_group_ids = ["${aws_security_group.internet-vpc-bastion-sg.id}"]
+  vpc_security_group_ids = ["${aws_security_group.default-sg-vpc-i.id}"]
   
   source_dest_check = false
   user_data = "${file("install.sh")}"
@@ -54,3 +54,4 @@ resource "aws_instance" "ec2-vpc-ni" {
     Name = "ec2-vpc-ni"
   }
 }
+
