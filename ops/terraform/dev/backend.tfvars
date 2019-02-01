@@ -1,1 +1,1 @@
-bucket = "viet-networking-terraform"
+bucket = "viet-networking-tfstate"
